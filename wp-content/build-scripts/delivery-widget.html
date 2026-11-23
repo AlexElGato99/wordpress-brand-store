@@ -1,0 +1,42 @@
+<div class="btq-delivery" hidden>
+  <p class="btq-promo">{{icon:tag}}<span>Temporary promo price! While stocks last.</span></p>
+  <div class="btq-ship">
+    <p><span class="btq-ship-ico">{{icon:truck}}</span><span>Order within <strong class="btq-cutoff">--:--:--</strong> and get it <span class="btq-when">tomorrow</span></span></p>
+    <p><span class="btq-ship-ico">{{icon:package}}</span><span>Expected delivery: <strong class="btq-date"></strong> · free shipping</span></p>
+  </div>
+</div>
+<script>
+(function () {
+  var box = document.currentScript.previousElementSibling;
+  var CUTOFF = 16; // orders before 16:00 ship the same working day
+  function nextDelivery(now) {
+    var ship = new Date(now);
+    var day = ship.getDay();
+    // ship today if a weekday before the cutoff, otherwise next weekday
+    if (day === 0 || day === 6 || now.getHours() >= CUTOFF) {
+      do { ship.setDate(ship.getDate() + 1); } while (ship.getDay() === 0 || ship.getDay() === 6);
+      ship.setHours(CUTOFF, 0, 0, 0);
+    } else { ship.setHours(CUTOFF, 0, 0, 0); }
+    var del = new Date(ship); del.setDate(del.getDate() + 1);
+    if (del.getDay() === 0) del.setDate(del.getDate() + 1); // no Sunday delivery
+    return { cutoff: ship, delivery: del };
+  }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function tick() {
+    var now = new Date(), d = nextDelivery(now), left = Math.max(0, d.cutoff - now) / 1000;
+    box.querySelector('.btq-cutoff').textContent = pad(Math.floor(left / 3600)) + ':' + pad(Math.floor(left % 3600 / 60)) + ':' + pad(Math.floor(left % 60));
+    var tomorrow = new Date(now); tomorrow.setDate(now.getDate() + 1);
+    box.querySelector('.btq-when').textContent = d.delivery.toDateString() === tomorrow.toDateString() ? 'tomorrow' : 'on ' + d.delivery.toLocaleDateString('en-GB', { weekday: 'long' });
+    box.querySelector('.btq-date').textContent = d.delivery.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+  }
+  function init() {
+    var onSale = document.querySelector('.elementor-widget-woocommerce-product-price del, .product .onsale');
+    box.querySelector('.btq-promo').hidden = !onSale;
+    var outOfStock = document.querySelector('.product.outofstock');
+    box.querySelector('.btq-ship').hidden = !!outOfStock;
+    box.hidden = !onSale && outOfStock;
+    tick(); setInterval(tick, 1000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
