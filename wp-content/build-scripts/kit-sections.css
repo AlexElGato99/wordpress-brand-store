@@ -1,0 +1,66 @@
+
+/* =====================================================================
+   OLD-SITE SECTIONS IN THE NEW STYLE - 1290px width, rails, reels, banners
+   ===================================================================== */
+:root { --lmx-width: 1290px; }
+
+/* winter-drop card aligns to the same 1290px content width */
+.btq-offer { max-width: calc(var(--lmx-width) - 40px) !important; }
+
+/* ---------- Swipeable rails (New in products + Trending reels) ---------- */
+.lmx-rail { position: relative; }
+.lmx-rail .lmx-rail__track, .btq-rail ul.products.lmx-rail__track {
+  display: flex !important; flex-wrap: nowrap !important; gap: 24px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+  scrollbar-width: none; -ms-overflow-style: none; margin: 0 !important; padding: 0 0 4px !important; grid-template-columns: none !important; }
+.lmx-rail .lmx-rail__track::-webkit-scrollbar { display: none; }
+.btq-rail ul.products.lmx-rail__track > li.product { flex: 0 0 calc((100% - 3 * 24px) / 4) !important; width: auto !important; margin: 0 !important; scroll-snap-align: start; }
+.lmx-rail__btn { position: absolute; top: calc(50% - 60px); z-index: 5; width: 46px; height: 46px; border-radius: 50%; border: 1px solid #E2DCD2 !important;
+  background: #fff !important; color: var(--ink) !important; display: flex; align-items: center; justify-content: center; padding: 0 !important; cursor: pointer;
+  box-shadow: 0 10px 26px -10px rgba(0,0,0,.25); transition: opacity .25s, transform .25s var(--ease), background .2s; }
+.lmx-rail__btn:hover { background: var(--ink) !important; color: #fff !important; border-color: var(--ink) !important; }
+.lmx-rail__btn:disabled { opacity: 0; pointer-events: none; }
+.lmx-rail__btn--prev { left: -23px; }
+.lmx-rail__btn--next { right: -23px; }
+.lmx-rail.is-static .lmx-rail__btn { display: none; }
+@media (max-width: 1360px) { .lmx-rail__btn--prev { left: 6px; } .lmx-rail__btn--next { right: 6px; } }
+@media (max-width: 1024px) { .btq-rail ul.products.lmx-rail__track > li.product { flex-basis: calc((100% - 2 * 16px) / 2.6) !important; } .lmx-rail .lmx-rail__track { gap: 16px; } }
+@media (max-width: 767px) {
+  .btq-rail ul.products.lmx-rail__track > li.product { flex-basis: 66% !important; }
+  .lmx-rail .lmx-rail__track { gap: 12px; margin-right: -16px !important; padding-right: 16px !important; }
+  .lmx-rail__btn { display: none; }
+}
+
+/* ---------- Trending reels (the old site's outfit videos) ---------- */
+.lmx-reels .lmx-rail__track { gap: 16px; }
+.lmx-reel { position: relative; flex: 0 0 calc((100% - 5 * 16px) / 5.6); aspect-ratio: 9 / 16; border-radius: 14px; overflow: hidden; background: #1A1714; scroll-snap-align: start; display: block; isolation: isolate; }
+.lmx-reel video { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+.lmx-reel:hover video { transform: scale(1.04); }
+.lmx-reel__shade { position: absolute; inset: auto 0 0 0; height: 30%; background: linear-gradient(180deg, transparent, rgba(0,0,0,.35)); pointer-events: none; }
+.lmx-reels .lmx-rail__btn { top: calc(50% - 23px); }
+@media (max-width: 1024px) { .lmx-reel { flex-basis: calc((100% - 2 * 16px) / 3.2); } }
+@media (max-width: 767px) { .lmx-reel { flex-basis: 44%; border-radius: 12px; } }
+
+/* ---------- Category tiles: 4:5 like the old banners ---------- */
+.btq-tile { aspect-ratio: 4 / 5; min-height: 0 !important; border-radius: 4px; overflow: hidden; }
+@media (max-width: 767px) { .btq-tile { aspect-ratio: 3 / 4; } }
+
+/* ---------- Shop banner (video / photo, like the old site) ---------- */
+.lmx-shop-banner { position: relative; height: 450px; border-radius: 6px; overflow: hidden; background: #1A1714; display: flex; align-items: flex-end; isolation: isolate; }
+.lmx-shop-banner .lmx-banner-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.lmx-shop-banner::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(10,8,6,.78) 0%, rgba(10,8,6,.35) 45%, rgba(10,8,6,.05) 75%), linear-gradient(0deg, rgba(10,8,6,.35), transparent 50%); }
+.lmx-shop-banner__inner { padding: 48px 56px; max-width: 640px; color: #fff; }
+.lmx-shop-banner__eyebrow { margin: 0 0 14px; font: 600 12px/1.3 "Jost", sans-serif; letter-spacing: .22em; text-transform: uppercase; color: #E8CD8E; }
+.lmx-shop-banner__title { margin: 0; font: 500 54px/1.02 "Jost", sans-serif; letter-spacing: -1px; color: #fff; }
+.lmx-shop-banner__sub { margin: 14px 0 0; font: 400 17px/1.55 "Jost", sans-serif; color: rgba(255,255,255,.82); }
+.btq-archive-intro .elementor-widget-woocommerce-archive-description { max-width: 760px; }
+@media (max-width: 1024px) { .lmx-shop-banner { height: 360px; } .lmx-shop-banner__title { font-size: 42px; } .lmx-shop-banner__inner { padding: 36px; } }
+@media (max-width: 767px) {
+  .lmx-shop-banner { height: 280px; border-radius: 4px; }
+  .lmx-shop-banner__inner { padding: 24px 20px; }
+  .lmx-shop-banner__title { font-size: 34px; }
+  .lmx-shop-banner__sub { font-size: 15px; }
+  .lmx-shop-banner__eyebrow { font-size: 11px; margin-bottom: 10px; }
+}
+
+/* ---------- Footer: 5 social icons on one line ---------- */
+.btq-footer .elementor-social-icons-wrapper { display: flex; flex-wrap: wrap; gap: 10px; }

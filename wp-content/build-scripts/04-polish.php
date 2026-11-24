@@ -41,8 +41,9 @@ $kit = \Elementor\Plugin::$instance->documents->get((int)get_option('elementor_a
 $kit->save(['settings' => array_merge($kit->get_settings() ?: [], [
     'site_name' => 'LMX Boutique',
     'global_image_lightbox' => '', // no lightbox script on every page
+    'container_width' => sz(1290), // same content width as the old site
     'site_description' => 'Premium Fashion & Luxury Essentials',
-    'custom_css' => file_get_contents(__DIR__ . '/kit.css') . file_get_contents(__DIR__ . '/kit-refine.css') . "\n/* Brand SVG artwork (generated from icons.php) */\n" . lmx_artwork_css(),
+    'custom_css' => file_get_contents(__DIR__ . '/kit.css') . file_get_contents(__DIR__ . '/kit-refine.css') . file_get_contents(__DIR__ . '/kit-sections.css') . "\n/* Brand SVG artwork (generated from icons.php) */\n" . lmx_artwork_css(),
 ])]);
 
 echo "== Main menu (same structure as the old site, English labels)\n";

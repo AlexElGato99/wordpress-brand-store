@@ -17,7 +17,9 @@ $TEL = 'tel:+31643584328';
 $WHATSAPP = 'https://wa.me/31643584328';
 $EMAIL = 'info@lmxboutique.nl';
 $INSTAGRAM = 'https://www.instagram.com/lmxboutique/';
-$TIKTOK = 'https://www.tiktok.com/@dripbylmx';
+$TIKTOK = 'https://www.tiktok.com/@lmx.boutique';
+$SNAPCHAT = 'https://www.snapchat.com/add/Lmxboutique';
+$TELEGRAM = 'https://t.me/+lijCNkDLvf4zNDJk';
 
 /* ---------------- Imagery (real photos only) ----------------
  * Optional own photos: set an attachment ID with bstate('photo_hero', ID) / bstate('photo_about', ID)
@@ -62,7 +64,7 @@ $announcement = con([
     ], typo('typography', 13, '400', 0.5))),
 ]);
 $header_main = con([
-    'content_width' => 'boxed', 'boxed_width' => sz(1440), 'flex_direction' => 'row', 'flex_justify_content' => 'space-between', 'flex_align_items' => 'center',
+    'content_width' => 'boxed', 'boxed_width' => sz(1290), 'flex_direction' => 'row', 'flex_justify_content' => 'space-between', 'flex_align_items' => 'center',
     'background_background' => 'classic', 'background_color' => '#FFFFFF', 'padding' => box(14, 20, 14, 20), 'padding_mobile' => box(10, 12, 10, 12),
     'flex_gap' => gap(10), 'flex_gap_mobile' => gap(0), 'flex_wrap' => 'nowrap', '_css_classes' => 'btq-h-row',
 ], [
@@ -131,6 +133,8 @@ el_template('footer', 'footer', 'LMX Footer', [
                 w('social-icons', ['social_icon_list' => [
                     ['_id' => eid(), 'social_icon' => ico('fab fa-instagram', 'fa-brands'), 'link' => lnk($INSTAGRAM)],
                     ['_id' => eid(), 'social_icon' => ico('fab fa-tiktok', 'fa-brands'), 'link' => lnk($TIKTOK)],
+                    ['_id' => eid(), 'social_icon' => ico('fab fa-snapchat-ghost', 'fa-brands'), 'link' => lnk($SNAPCHAT)],
+                    ['_id' => eid(), 'social_icon' => ico('fab fa-telegram-plane', 'fa-brands'), 'link' => lnk($TELEGRAM)],
                     ['_id' => eid(), 'social_icon' => ico('fab fa-whatsapp', 'fa-brands'), 'link' => lnk($WHATSAPP)],
                 ], 'icon_color' => 'custom', 'icon_primary_color' => '#1E1C1A', 'icon_secondary_color' => GOLD_LIGHT, 'icon_size' => sz(17), 'icon_padding' => ['unit' => 'em', 'size' => 0.75], 'icon_spacing' => sz(10), 'align' => 'left', 'shape' => 'circle']),
             ], true),
@@ -173,10 +177,10 @@ el_template('single-product', 'product', 'LMX Single Product', [
         w('woocommerce-breadcrumb', ['text_color' => '#8A8A8A', 'link_color' => INK] + typo('text_typography', 13, '400', 0.5)),
     ]),
     con(['content_width' => 'boxed', 'flex_direction' => 'row', 'flex_direction_mobile' => 'column', 'flex_gap' => gap(60), 'flex_gap_tablet' => gap(30), 'padding' => box(10, 20, 60, 20)], [
-        con(['content_width' => 'full', 'width' => sz(55, '%'), 'width_mobile' => sz(100, '%'), 'padding' => box(0, 0, 0, 0)], [
+        con(['content_width' => 'full', 'width' => sz(50, '%'), 'width_mobile' => sz(100, '%'), 'padding' => box(0, 0, 0, 0)], [
             w('woocommerce-product-images', ['sale_flash' => 'yes', 'spacing_thumbs' => sz(8)]),
         ], true),
-        con(['content_width' => 'full', 'width' => sz(45, '%'), 'width_mobile' => sz(100, '%'), 'flex_direction' => 'column', 'flex_gap' => gap(14), 'padding' => box(0, 0, 0, 0),
+        con(['content_width' => 'full', 'width' => sz(50, '%'), 'width_mobile' => sz(100, '%'), 'flex_direction' => 'column', 'flex_gap' => gap(14), 'padding' => box(0, 0, 0, 0),
              '_css_classes' => 'btq-sticky-col'], [
             w('shortcode', ['shortcode' => '[lmx_brand]']),
             w('woocommerce-product-title', array_merge(['__dynamic__' => ['title' => \Elementor\Plugin::$instance->dynamic_tags->tag_data_to_tag_text(null, 'woocommerce-product-title-tag')], 'header_size' => 'h1', 'title_color' => INK, 'typography_font_size_mobile' => sz(24)], typo('typography', 30, '500', -0.4, null, 1.25))),
@@ -206,16 +210,17 @@ echo "single product ok\n";
 
 /* ---------------- PRODUCT ARCHIVE (shop + categories) ---------------- */
 el_template('product-archive', 'product-archive', 'LMX Shop Archive', [
-    con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_align_items' => 'center', 'flex_gap' => gap(10),
-         'background_background' => 'classic', 'background_color' => SOFT, 'padding' => box(56, 20, 44, 20), 'padding_mobile' => box(36, 16, 28, 16), '_css_classes' => 'btq-pattern-light btq-page-head'], [
-        w('woocommerce-breadcrumb', ['text_color' => '#8A8A8A', 'link_color' => INK, 'align' => 'center'] + typo('text_typography', 13, '400', 0.5)),
-        w('theme-archive-title', array_merge(['__dynamic__' => ['title' => \Elementor\Plugin::$instance->dynamic_tags->tag_data_to_tag_text(null, 'archive-title', ['include_context' => ''])], 'header_size' => 'h1', 'title_color' => INK, 'align' => 'center', 'typography_font_size_mobile' => sz(32)], typo('typography', 46, '500', -0.8, null, 1.1))),
-        w('woocommerce-archive-description', ['align' => 'center', 'text_color' => '#666']),
-        w('shortcode', ['shortcode' => '[lmx_subcats]']),
+    con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_gap' => gap(18), 'padding' => box(22, 20, 0, 20), 'padding_mobile' => box(14, 12, 0, 12)], [
+        w('woocommerce-breadcrumb', ['text_color' => '#8A8A8A', 'link_color' => INK] + typo('text_typography', 13, '400', 0.3)),
+        w('shortcode', ['shortcode' => '[lmx_shop_banner]']),
+        con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_align_items' => 'center', 'flex_gap' => gap(6), 'padding' => box(18, 0, 0, 0), '_css_classes' => 'btq-archive-intro'], [
+            w('woocommerce-archive-description', ['align' => 'center', 'text_color' => '#5F5A52']),
+            w('shortcode', ['shortcode' => '[lmx_subcats]']),
+        ], true),
     ]),
-    con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(40, 20, 80, 20)], [
+    con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(28, 20, 80, 20)], [
         w('wc-archive-products', [
-            'columns' => '4', 'columns_tablet' => '3', 'columns_mobile' => '2', 'rows' => 6, 'paginate' => 'yes', 'allow_order' => 'yes', 'show_result_count' => 'yes',
+            'columns' => '4', 'columns_tablet' => '3', 'columns_mobile' => '2', 'rows' => 4, 'paginate' => 'yes', 'allow_order' => 'yes', 'show_result_count' => 'yes',
             'query_post_type' => 'current_query', 'column_gap' => sz(24), 'column_gap_mobile' => sz(12), 'row_gap' => sz(40), 'nothing_found_message' => 'No products found in this category yet.',
         ]),
     ]),
@@ -268,8 +273,8 @@ $section_head = fn($title, $sub = null, $link = null, $link_text = 'View all') =
 $home = [];
 // 1. Hero
 $home[] = con([
-    'content_width' => 'boxed', 'boxed_width' => sz(1440), 'flex_direction' => 'column', 'flex_justify_content' => 'center', 'flex_align_items' => 'flex-start', 'flex_gap' => gap(20),
-    'min_height' => sz(86, 'vh'), 'min_height_mobile' => sz(78, 'vh'), 'padding' => box(80, 50, 80, 50), 'padding_mobile' => box(60, 20, 60, 20),
+    'content_width' => 'boxed', 'boxed_width' => sz(1290), 'flex_direction' => 'column', 'flex_justify_content' => 'center', 'flex_align_items' => 'flex-start', 'flex_gap' => gap(20),
+    'min_height' => sz(86, 'vh'), 'min_height_mobile' => sz(78, 'vh'), 'padding' => box(80, 20, 80, 20), 'padding_mobile' => box(60, 20, 60, 20),
     'background_background' => $hero ? 'classic' : 'gradient', 'background_image' => img($hero), 'background_position' => $hero_pos, 'background_position_mobile' => 'center right', 'background_size' => 'cover', '_css_classes' => 'btq-hero',
     'background_color' => '#2A2119', 'background_color_b' => '#050505', 'background_gradient_type' => 'radial', 'background_gradient_position' => 'center right',
     // warm dark gradient from the left so the white text reads on a light photo; extra shading via .btq-hero in kit.css
@@ -337,14 +342,14 @@ $home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_g
     $section_head('New in', null, $shop_url, 'View all'),
     w('woocommerce-products', [
         'query_post_type' => 'product', 'query_orderby' => 'date', 'query_order' => 'desc', 'query_exclude' => ['terms'], 'query_exclude_term_ids' => [$tt('jackets')],
-        'columns' => '4', 'columns_tablet' => '3', 'columns_mobile' => '2', 'rows' => 2, 'paginate' => '', 'column_gap' => sz(24), 'column_gap_mobile' => sz(12), 'row_gap' => sz(40),
+        'columns' => '4', 'columns_tablet' => '3', 'columns_mobile' => '2', 'rows' => 3, 'paginate' => '', 'column_gap' => sz(24), 'column_gap_mobile' => sz(12), 'row_gap' => sz(40), '_css_classes' => 'btq-rail',
     ]),
     button('Show more', $shop_url, 'outline', ['align' => 'center', 'selected_icon' => ico(''), '_css_classes' => 'btq-more']),
 ]);
 // 5. Category tiles
 $tile = fn($slug, $label) => con([
-    'content_width' => 'full', 'flex_direction' => 'column', 'flex_justify_content' => 'flex-end', 'min_height' => sz(460), 'min_height_tablet' => sz(340), 'min_height_mobile' => sz(240), 'padding' => box(28, 28, 28, 28), 'padding_mobile' => box(14, 14, 14, 14),
-    'background_background' => 'classic', 'background_color' => SOFT, 'background_image' => img($cat_image($slug)), 'background_position' => 'center center', 'background_size' => 'cover',
+    'content_width' => 'full', 'flex_direction' => 'column', 'flex_justify_content' => 'flex-end', 'min_height' => sz(0), 'padding' => box(28, 28, 28, 28), 'padding_mobile' => box(14, 14, 14, 14),
+    'background_background' => 'classic', 'background_color' => SOFT, 'background_image' => img((int)bstate("cat_banner_$slug") ?: $cat_image($slug)), 'background_position' => 'center center', 'background_size' => 'cover',
     'background_overlay_background' => 'gradient', 'background_overlay_color' => 'rgba(0,0,0,0)', 'background_overlay_color_b' => 'rgba(10,8,6,0.62)', 'background_overlay_gradient_angle' => sz(180, 'deg'), 'background_overlay_color_stop' => sz(45, '%'),
     'link' => lnk($cat_url($slug)), 'html_tag' => 'a', '_css_classes' => 'btq-tile',
 ], [
@@ -353,7 +358,7 @@ $tile = fn($slug, $label) => con([
 $home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_gap' => gap(36), 'padding' => box(64, 20, 96, 20), 'padding_mobile' => box(40, 16, 56, 16)], [
     $section_head('Shop by category', null, $shop_url, 'All products'),
     con(['content_width' => 'full', 'container_type' => 'grid', 'grid_columns_grid' => sz(3, 'fr'), 'grid_columns_grid_tablet' => sz(3, 'fr'), 'grid_columns_grid_mobile' => sz(2, 'fr'), 'grid_rows_grid' => sz(2, 'fr'),
-         'grid_gaps' => gap(16), 'grid_gaps_mobile' => gap(10), 'padding' => box(0, 0, 0, 0)], [
+         'grid_gaps' => gap(20), 'grid_gaps_mobile' => gap(10), 'padding' => box(0, 0, 0, 0)], [
         $tile('shoes', 'Shoes'), $tile('t-shirts', 'T-Shirts'), $tile('jackets', 'Jackets'), $tile('pants', 'Pants'), $tile('bags', 'Bags'), $tile('accessories', 'Accessories'),
     ], true),
 ]);
@@ -361,10 +366,7 @@ $home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_g
 $home[] = con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(36), 'padding' => box(88, 0, 88, 0), 'padding_mobile' => box(56, 0, 56, 0), 'background_background' => 'classic', 'background_color' => SOFT, '_css_classes' => 'btq-pattern-light'], [
     con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(0, 20, 0, 20)], [$section_head('Trending', 'The latest looks & outfits', $shop_url, 'Shop the looks')], true),
     con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(0, 20, 0, 20)], [
-        w('woocommerce-products', [
-            'query_post_type' => 'product', 'query_include' => ['terms'], 'query_include_term_ids' => array_values(array_filter([$tt('bags'), $tt('shoes'), $tt('accessories')])), 'query_orderby' => 'date', 'query_order' => 'desc',
-            'columns' => '6', 'columns_tablet' => '3', 'columns_mobile' => '2', 'rows' => 1, 'paginate' => '', 'column_gap' => sz(12), 'column_gap_mobile' => sz(8), 'row_gap' => sz(12), '_css_classes' => 'btq-looks',
-        ]),
+        w('shortcode', ['shortcode' => '[lmx_trending_reels]']),
     ], true),
 ]);
 // 7. Reviews

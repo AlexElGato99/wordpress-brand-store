@@ -38,7 +38,7 @@ remove_action('wp_body_open', 'wp_global_styles_render_svg_filters');
 /* ---------- Shop behaviour ---------- */
 
 // 24 products per shop/category page.
-add_filter('loop_shop_per_page', fn() => 24, 30);
+add_filter('loop_shop_per_page', fn() => 16, 30);   // 4 x 4, like the old site
 
 // Site search returns products (uses the Elementor shop archive template).
 add_action('pre_get_posts', function ($q) {
