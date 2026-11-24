@@ -186,8 +186,11 @@ el_template('single-product', 'product', 'LMX Single Product', [
             w('woocommerce-product-title', array_merge(['__dynamic__' => ['title' => \Elementor\Plugin::$instance->dynamic_tags->tag_data_to_tag_text(null, 'woocommerce-product-title-tag')], 'header_size' => 'h1', 'title_color' => INK, 'typography_font_size_mobile' => sz(24)], typo('typography', 30, '500', -0.4, null, 1.25))),
             w('woocommerce-product-rating', []),
             w('woocommerce-product-price', array_merge(['price_color' => INK, 'sale_price_color' => '#B3261E', 'sale_price_newline' => ''], typo('typography', 24, '600'))),
-            w('html', ['html' => $with_icons(file_get_contents(__DIR__ . '/delivery-widget.html'))]),
+            // Same order as the old site: stock, short description, delivery info, size guide, add to cart
+            w('shortcode', ['shortcode' => '[lmx_stock_note]', '_css_classes' => 'lmx-tight']),
             w('woocommerce-product-short-description', array_merge(['text_color' => '#555555'], typo('text_typography', 15, '400', null, null, 1.6))),
+            w('html', ['html' => $with_icons(file_get_contents(__DIR__ . '/delivery-widget.html'))]),
+            w('shortcode', ['shortcode' => '[lmx_size_guide]', '_css_classes' => 'lmx-tight']),
             w('woocommerce-product-add-to-cart', array_merge([
                 'button_text_color' => '#FFFFFF', 'button_bg_color' => INK, 'button_text_color_hover' => INK, 'button_bg_color_hover' => GOLD,
                 'button_border_radius' => box(2, 2, 2, 2), 'button_padding' => box(18, 30, 18, 30),
@@ -204,6 +207,10 @@ el_template('single-product', 'product', 'LMX Single Product', [
     con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(20, 20, 70, 20)], [
         w('woocommerce-product-related', array_merge(['posts_per_page' => 4, 'columns' => '4', 'columns_tablet' => '3', 'columns_mobile' => '2', 'orderby' => 'rand',
             'show_heading' => 'yes', 'heading_color' => INK, 'column_gap' => sz(24), 'column_gap_mobile' => sz(12), 'row_gap' => sz(30)], typo('heading_typography', 30, '500', -0.5))),
+    ]),
+    // Recently viewed (old site: "Recent Views"); renders nothing until the visitor has seen other products
+    con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(0, 20, 80, 20), '_css_classes' => 'lmx-recent-wrap'], [
+        w('shortcode', ['shortcode' => '[lmx_recently_viewed]']),
     ]),
 ], ['include/product']);
 echo "single product ok\n";
@@ -318,7 +325,7 @@ $home[] = con([
             ], typo('digits_typography', 34, '700'), typo('label_typography', 11, '500', 2, 'uppercase'))),
             con(['content_width' => 'full', 'flex_direction' => 'row', 'flex_wrap' => 'wrap', 'flex_gap' => gap(12), 'padding' => box(0, 0, 0, 0)], [
                 button('Shop the jackets', get_term_link($winter), 'gold'),
-                button('Full sale', $page_url('sale'), 'ghost', ['selected_icon' => ico('')]),
+                button('Full sale', $page_url('sale'), 'dark'),
             ], true),
         ], true),
     ], true),

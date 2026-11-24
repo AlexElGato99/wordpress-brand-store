@@ -43,7 +43,7 @@ $kit->save(['settings' => array_merge($kit->get_settings() ?: [], [
     'global_image_lightbox' => '', // no lightbox script on every page
     'container_width' => sz(1290), // same content width as the old site
     'site_description' => 'Premium Fashion & Luxury Essentials',
-    'custom_css' => file_get_contents(__DIR__ . '/kit.css') . file_get_contents(__DIR__ . '/kit-refine.css') . file_get_contents(__DIR__ . '/kit-sections.css') . "\n/* Brand SVG artwork (generated from icons.php) */\n" . lmx_artwork_css(),
+    'custom_css' => file_get_contents(__DIR__ . '/kit.css') . file_get_contents(__DIR__ . '/kit-refine.css') . file_get_contents(__DIR__ . '/kit-sections.css') . file_get_contents(__DIR__ . '/kit-pdp.css') . "\n/* Brand SVG artwork (generated from icons.php) */\n" . lmx_artwork_css(),
 ])]);
 
 echo "== Main menu (same structure as the old site, English labels)\n";
@@ -112,4 +112,5 @@ el_template('error-404', 'error-404', 'LMX 404 Page', [
 
 wc_delete_product_transients();
 \Elementor\Plugin::$instance->files_manager->clear_cache();
+delete_post_meta_by_key('_elementor_element_cache'); // cached widget HTML (picks up filter changes)
 echo "done.\n";

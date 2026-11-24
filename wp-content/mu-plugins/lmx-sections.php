@@ -8,25 +8,43 @@ if (!defined('ABSPATH')) exit;
 
 function lmx_state($key) { $s = get_option('boutique_build_state', []); return $s[$key] ?? null; }
 
+/** Choose the closest visual category for both parent and nested shop archives. */
+function lmx_section_banner_key($term) {
+    if (!$term || is_wp_error($term)) return 'shop';
+    $map = [
+        'men'=>'men','heren'=>'men','women'=>'women','dames'=>'women',
+        'shoes'=>'shoes','schoenen-heren'=>'shoes','dames-schoenen'=>'footwear_women',
+        'sneakers'=>'shoes','dames-schoenen-sneakers'=>'footwear_women','loafers'=>'shoes',
+        'heren-schoenen-boots'=>'shoes','dames-schoenen-boots'=>'footwear_women',
+        'slippers'=>'shoes','dames-schoenen-sandalen'=>'footwear_women',
+        'shirts'=>'shirts','t-shirts'=>'shirts','polos'=>'shirts','kleding'=>'shirts',
+        'jackets'=>'jackets','jassen'=>'jackets','bodywarmers'=>'jackets','tussenjassen'=>'jackets','winterjassen'=>'jackets',
+        'pants'=>'pants','broeken'=>'pants','jeans'=>'pants','zwembroeken'=>'swimwear',
+        'bags'=>'bags','heren-tassen'=>'bags','dames-tassen'=>'bags',
+        'accessories'=>'accessories','accessoires'=>'accessories','dames-accessoires'=>'accessories',
+        'horloges'=>'watches','zonnebrillen'=>'sunglasses','dames-zonnebrillen'=>'sunglasses',
+        'trainingspakken'=>'trainers','truien'=>'knitwear','sweaters'=>'knitwear','hoodies'=>'knitwear',
+        'sale'=>'sale','outlet'=>'sale','voorraad'=>'shop','op-bestelling'=>'shop','merken'=>'shop',
+    ];
+    $terms = array_merge([$term->term_id], get_ancestors($term->term_id, 'product_cat'));
+    foreach ($terms as $id) {
+        $item = get_term($id, 'product_cat');
+        if ($item && !is_wp_error($item) && isset($map[$item->slug])) return $map[$item->slug];
+    }
+    return 'shop';
+}
+
 /* ---------- [lmx_shop_banner] : media banner at the top of shop / category pages ---------- */
 add_shortcode('lmx_shop_banner', function () {
     $term = is_product_category() ? get_queried_object() : null;
     $slug = $term ? $term->slug : '';
-    // Same banners as the old site: Men + Women have a video, Sale its own photo, everything else the shared store photo.
-    $key = in_array($slug, ['heren', 'dames', 'sale'], true) ? $slug : 'default';
-    $copy = [
-        'heren'   => ['Discover the latest designer fashion', 'Men’s Collection'],
-        'dames'   => ['Discover the best designer brands in our collection', 'Experience the quality of Dripbylmx Fashion'],
-        'sale'    => ['Exclusive deals on designer items', 'Sale'],
-        'default' => ['Discover the best designer brands in our collection', 'Experience the quality of Dripbylmx Fashion'],
-    ][$key];
+    $key = lmx_section_banner_key($term);
+    $copy = ['Explore our curated collection', 'Discover the collection'];
     $title = $term ? $term->name : (is_search() ? sprintf('Search: %s', get_search_query()) : 'Shop');
-    $video = (int)lmx_state("shop_banner_{$key}_video");
-    $poster = (int)lmx_state("shop_banner_{$key}_poster");
+    $poster = (int)lmx_state("generated_banner_{$key}");
+    if (!$poster) $poster = (int)lmx_state('shop_banner_default_poster');
     $poster_url = $poster ? wp_get_attachment_image_url($poster, 'full') : '';
-    $media = $video
-        ? '<video class="lmx-banner-media" src="' . esc_url(wp_get_attachment_url($video)) . '" poster="' . esc_url($poster_url) . '" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video>'
-        : ($poster ? wp_get_attachment_image($poster, 'full', false, ['class' => 'lmx-banner-media', 'alt' => '', 'fetchpriority' => 'high', 'loading' => 'eager']) : '');
+    $media = $poster ? wp_get_attachment_image($poster, 'full', false, ['class' => 'lmx-banner-media', 'alt' => '', 'fetchpriority' => 'high', 'loading' => 'eager']) : '';
     $out  = '<section class="lmx-shop-banner lmx-shop-banner--' . esc_attr($key) . '">' . $media . '<div class="lmx-shop-banner__inner">';
     $out .= '<p class="lmx-shop-banner__eyebrow">' . esc_html($copy[1]) . '</p>';
     $out .= '<h1 class="lmx-shop-banner__title">' . esc_html($title) . '</h1>';

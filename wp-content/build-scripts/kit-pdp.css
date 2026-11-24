@@ -1,0 +1,70 @@
+
+/* =====================================================================
+   PRODUCT DETAILS - old-site content in the new style
+   ===================================================================== */
+.lmx-tight .elementor-shortcode:empty, .lmx-tight:has(.elementor-shortcode:empty) { display: none; }
+
+/* stock line under the price */
+.lmx-stock { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 0; font: 500 14px/1.4 "Jost", sans-serif; color: #2F6B3F; }
+.lmx-stock__dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 4px rgba(47,107,63,.12); flex: 0 0 auto; }
+.lmx-stock--last { color: #A0522D; }
+.lmx-stock--last .lmx-stock__dot { box-shadow: 0 0 0 4px rgba(160,82,45,.14); animation: lmx-pulse 1.8s ease-in-out infinite; }
+.lmx-stock--last strong { font-weight: 600; }
+.lmx-stock__sep { opacity: .5; }
+.lmx-stock--out { color: #8A8378; }
+@keyframes lmx-pulse { 0%, 100% { box-shadow: 0 0 0 3px rgba(160,82,45,.18); } 50% { box-shadow: 0 0 0 7px rgba(160,82,45,.04); } }
+@media (prefers-reduced-motion: reduce) { .lmx-stock--last .lmx-stock__dot { animation: none; } }
+
+/* "Last item" badge on product cards */
+.lmx-last-badge { display: inline-block; margin-top: 8px; padding: 4px 9px; border: 1px solid #E5C7B4; background: #FBF3EE; color: #A0522D; border-radius: 100px; font: 600 10.5px/1.2 "Jost", sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.btq-dark .lmx-last-badge { background: rgba(232,205,142,.1); border-color: rgba(232,205,142,.35); color: #E8CD8E; }
+
+/* size guide button + dialog */
+.lmx-sg-btn { display: inline-flex !important; align-items: center; gap: 10px; background: none !important; border: 0 !important; padding: 4px 0 !important; color: var(--ink) !important;
+  font: 500 14px/1 "Jost", sans-serif !important; letter-spacing: .02em !important; text-transform: none !important; cursor: pointer; box-shadow: none !important; }
+.lmx-sg-btn span { border-bottom: 1px solid currentColor; padding-bottom: 3px; }
+.lmx-sg-btn svg { color: var(--gold); }
+.lmx-sg-btn:hover { color: var(--gold) !important; }
+.lmx-sg { border: 0; padding: 0; border-radius: 6px; max-width: min(520px, calc(100vw - 32px)); width: 100%; box-shadow: 0 30px 80px -20px rgba(0,0,0,.45); }
+.lmx-sg::backdrop { background: rgba(11,11,11,.55); backdrop-filter: blur(2px); }
+.lmx-sg__box { position: relative; padding: 36px 36px 30px; background: #fff; }
+.lmx-sg__close { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; border: 1px solid #E6E0D6 !important; background: #fff !important; color: var(--ink) !important; display: flex; align-items: center; justify-content: center; padding: 0 !important; cursor: pointer; }
+.lmx-sg__close:hover { background: var(--ink) !important; color: #fff !important; }
+.lmx-sg__eyebrow { margin: 0 0 6px; font: 600 11.5px/1 "Jost", sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.lmx-sg h3 { margin: 0 0 14px; font: 500 28px/1.15 "Jost", sans-serif; letter-spacing: -.4px; color: var(--ink); }
+.lmx-sg__tip { margin: 0 0 18px; font-size: 15px; line-height: 1.65; color: #4A453E; }
+.lmx-sg-table { width: 100%; border-collapse: collapse; font-size: 14.5px; font-feature-settings: "tnum" 1; }
+.lmx-sg-table th { text-align: left; font-weight: 600; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #8A8378; padding: 0 12px 10px 0; border-bottom: 1px solid var(--ink); }
+.lmx-sg-table td { padding: 11px 12px 11px 0; border-bottom: 1px solid var(--line); color: var(--ink); }
+.lmx-sg-table tbody tr:hover td { background: #FBF9F5; }
+.lmx-sg__help { margin: 18px 0 0; font-size: 14px; color: #6B655C; }
+.lmx-sg__help a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 767px) { .lmx-sg__box { padding: 30px 20px 24px; } .lmx-sg h3 { font-size: 24px; } }
+
+/* gallery arrows */
+.woocommerce-product-gallery .flex-direction-nav { list-style: none; margin: 0; padding: 0; }
+.woocommerce-product-gallery .flex-direction-nav a { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.92); color: var(--ink);
+  display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 22px -10px rgba(0,0,0,.35); transition: opacity .25s, background .2s, color .2s; opacity: 0; text-decoration: none; }
+.woocommerce-product-gallery .flex-direction-nav .flex-prev { left: 14px; }
+.woocommerce-product-gallery .flex-direction-nav .flex-next { right: 14px; }
+.woocommerce-product-gallery:hover .flex-direction-nav a { opacity: 1; }
+.woocommerce-product-gallery .flex-direction-nav a:hover { background: var(--ink); color: #fff; }
+.woocommerce-product-gallery .flex-direction-nav a.flex-disabled { opacity: 0 !important; pointer-events: none; }
+.woocommerce-product-gallery .flex-viewport { position: relative; }
+@media (hover: none) { .woocommerce-product-gallery .flex-direction-nav a { opacity: 1; width: 38px; height: 38px; } }
+
+/* product meta (SKU, categories, tags) */
+.elementor-widget-woocommerce-product-meta .product_meta > span { display: block; padding: 6px 0; font-size: 13.5px; color: #8A8378; }
+.elementor-widget-woocommerce-product-meta .product_meta a { color: var(--ink); text-decoration: none; }
+.elementor-widget-woocommerce-product-meta .product_meta a:hover { color: var(--gold); }
+
+/* recently viewed */
+.lmx-recent__head { padding-bottom: 20px; margin-bottom: 28px; border-bottom: 1px solid var(--line); }
+.lmx-recent__title { margin: 0; font: 500 30px/1.15 "Jost", sans-serif; letter-spacing: -.5px; color: var(--ink); }
+.lmx-recent .woocommerce { margin: 0; }
+.lmx-recent-wrap:not(:has(.lmx-recent)) { display: none !important; }
+@media (max-width: 767px) { .lmx-recent__title { font-size: 24px; } }
+.lmx-sg .lmx-sg-table, .lmx-sg .lmx-sg-table th, .lmx-sg .lmx-sg-table td { border-left: 0 !important; border-right: 0 !important; border-top: 0 !important; background: none; }
+.lmx-sg .lmx-sg-table { border: 0 !important; margin: 0; }
+.lmx-sg .lmx-sg-table th { border-bottom: 1px solid #0B0B0B !important; }
+.lmx-sg .lmx-sg-table td { border-bottom: 1px solid #E6E0D6 !important; }

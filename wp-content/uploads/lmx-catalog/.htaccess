@@ -497,5 +497,9 @@ RewriteRule ^92b8538a598e698d2deb\.jpg$ /boutique/wp-content/uploads/lmx-catalog
 RewriteRule ^92b8538a598e698d2deb\-150x150\.jpg$ /boutique/wp-content/uploads/lmx-catalog/92b8538a598e698d2deb-clean-150x150.png [R=302,L,NE]
 RewriteRule ^92b8538a598e698d2deb\-500x750\.jpg$ /boutique/wp-content/uploads/lmx-catalog/92b8538a598e698d2deb-clean-500x750.png [R=302,L,NE]
 RewriteRule ^92b8538a598e698d2deb\-800x1422\.jpg$ /boutique/wp-content/uploads/lmx-catalog/92b8538a598e698d2deb-clean-800x1422.png [R=302,L,NE]
+RewriteRule ^a8ea97e87bbe458c31f3\.jpg$ /boutique/wp-content/uploads/lmx-catalog/a8ea97e87bbe458c31f3-clean.png [R=302,L,NE]
+RewriteRule ^a8ea97e87bbe458c31f3\-150x150\.jpg$ /boutique/wp-content/uploads/lmx-catalog/a8ea97e87bbe458c31f3-clean-150x150.png [R=302,L,NE]
+RewriteRule ^a8ea97e87bbe458c31f3\-500x750\.jpg$ /boutique/wp-content/uploads/lmx-catalog/a8ea97e87bbe458c31f3-clean-500x750.png [R=302,L,NE]
+RewriteRule ^a8ea97e87bbe458c31f3\-800x1422\.jpg$ /boutique/wp-content/uploads/lmx-catalog/a8ea97e87bbe458c31f3-clean-800x1422.png [R=302,L,NE]
 </IfModule>
 # END LMX cleaned image redirects

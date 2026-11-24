@@ -64,3 +64,23 @@
 
 /* ---------- Footer: 5 social icons on one line ---------- */
 .btq-footer .elementor-social-icons-wrapper { display: flex; flex-wrap: wrap; gap: 10px; }
+.btq-offer { max-width: var(--lmx-width) !important; }
+.lmx-shop-banner h1.lmx-shop-banner__title { color: #fff !important; font-family: "Jost", sans-serif !important; font-size: 54px; }
+@media (max-width: 1024px) { .lmx-shop-banner h1.lmx-shop-banner__title { font-size: 42px; } }
+@media (max-width: 767px) { .lmx-shop-banner h1.lmx-shop-banner__title { font-size: 34px; } }
+.lmx-shop-banner p.lmx-shop-banner__sub { color: rgba(255,255,255,.84) !important; }
+@media (max-width: 767px) { .btq-archive-intro .lmx-chips { margin: 14px -12px 0; padding: 0 12px 6px; max-width: calc(100% + 24px); } .btq-archive-intro { overflow: hidden; } }
+
+/* Winter-drop CTAs: same look as the hero buttons, equal width */
+.btq-offer .elementor-widget-button { flex: 0 0 auto; }
+.btq-offer .elementor-widget-button .elementor-button { width: 270px; justify-content: center; white-space: nowrap; border-radius: 2px !important; }
+/* light edge drawn inside, so the height stays exactly like the hero buttons */
+.btq-offer .elementor-widget-button:last-child .elementor-button { box-shadow: inset 0 0 0 1px rgba(255,255,255,.28); }
+.btq-offer .elementor-widget-button:last-child .elementor-button:hover { box-shadow: inset 0 0 0 1px #fff; }
+@media (max-width: 767px) {
+  .btq-offer .elementor-widget-button { flex: 1 1 0; min-width: 0; }
+  .btq-offer .elementor-widget-button .elementor-button { width: 100%; padding-left: 12px !important; padding-right: 12px !important; }
+}
+/* winter CTAs share the row equally (side by side like the hero), stacking only when the column is too narrow */
+.btq-offer .elementor-widget-button { flex: 1 1 230px !important; min-width: 0; }
+.btq-offer .elementor-widget-button .elementor-button { width: 100% !important; padding-left: 18px !important; padding-right: 18px !important; }
