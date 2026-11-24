@@ -42,7 +42,7 @@ $kit->save(['settings' => array_merge($kit->get_settings() ?: [], [
     'site_name' => 'LMX Boutique',
     'global_image_lightbox' => '', // no lightbox script on every page
     'site_description' => 'Premium Fashion & Luxury Essentials',
-    'custom_css' => file_get_contents(__DIR__ . '/kit.css') . "\n/* Brand SVG artwork (generated from icons.php) */\n" . lmx_artwork_css(),
+    'custom_css' => file_get_contents(__DIR__ . '/kit.css') . file_get_contents(__DIR__ . '/kit-refine.css') . "\n/* Brand SVG artwork (generated from icons.php) */\n" . lmx_artwork_css(),
 ])]);
 
 echo "== Main menu (same structure as the old site, English labels)\n";

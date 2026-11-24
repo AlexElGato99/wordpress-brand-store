@@ -104,38 +104,35 @@ el_template('header', 'header', 'LMX Header', [
 echo "header ok\n";
 
 /* ---------------- FOOTER ---------------- */
-$fhead = fn($t) => w('heading', array_merge(['title' => $t, 'header_size' => 'h4', 'title_color' => GOLD, '_css_classes' => 'btq-fhead'], typo('typography', 12, '600', 3.6, 'uppercase', 1.2)));
+$fhead = fn($t) => w('heading', array_merge(['title' => $t, 'header_size' => 'h4', 'title_color' => GOLD, '_css_classes' => 'btq-fhead'], typo('typography', 14, '600', 3.2, 'uppercase', 1.2)));
 $footer_link_list = fn($items) => w('icon-list', array_merge([
     'icon_list' => array_map(fn($i) => ['_id' => eid(), 'text' => $i[0], 'link' => lnk($i[1]), 'selected_icon' => ico('')], $items),
-    'space_between' => sz(12), 'text_color' => '#BDB6AA', 'text_color_hover' => GOLD_LIGHT, 'icon_self_align' => 'left', '_css_classes' => 'btq-flinks',
-], typo('icon_typography', 14, '400', 0.3, null, 1.5)));
+    'space_between' => sz(16), 'text_color' => '#CFC8BC', 'text_color_hover' => GOLD_LIGHT, 'icon_self_align' => 'left', '_css_classes' => 'btq-flinks',
+], typo('icon_typography', 16, '500', 0.6, null, 1.5)));
 el_template('footer', 'footer', 'LMX Footer', [
-    // USP bar
-    con(['content_width' => 'boxed', 'container_type' => 'grid', 'grid_columns_grid' => sz(4, 'fr'), 'grid_columns_grid_tablet' => sz(2, 'fr'), 'grid_columns_grid_mobile' => sz(1, 'fr'),
-         'grid_rows_grid' => sz(1, 'fr'), 'grid_gaps' => gap(24), 'padding' => box(48, 20, 48, 20), 'background_background' => 'classic', 'background_color' => SOFT, '_css_classes' => 'btq-pattern-light btq-usp'], array_map(fn($u) =>
-        w('icon-box', array_merge([
-            'selected_icon' => ico($u[0]), 'title_text' => $u[1], 'description_text' => $u[2], 'position' => 'inline-start', 'title_size' => 'h4',
-            'primary_color' => INK, 'icon_size' => sz(28), 'icon_space' => sz(16), 'title_color' => INK, 'description_color' => '#6B6B6B', 'title_bottom_space' => sz(4),
-        ], typo('title_typography', 16, '600'), typo('description_typography', 14, '400'))),
-        [['fas fa-shipping-fast', 'Order before 16:00', 'Ordered today, delivered tomorrow'], ['fas fa-exchange-alt', 'Exchange guarantee', 'Exchange within 3 days'],
-         ['fas fa-lock', 'Secure payment', 'Pay safely with every bank'], ['fas fa-award', 'Satisfaction guarantee', '100% satisfaction guaranteed']])),
+    // USP bar (line icons)
+    con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(44, 20, 44, 20), 'background_background' => 'classic', 'background_color' => SOFT, '_css_classes' => 'btq-pattern-light btq-usp'], [
+        w('html', ['html' => '<ul class="btq-usp-list">' . implode('', array_map(fn($u) => '<li>' . lmx_icon($u[0], 26) . '<div><strong>' . $u[1] . '</strong><span>' . $u[2] . '</span></div></li>', [
+            ['truck', 'Order before 16:00', 'Ordered today, delivered tomorrow'], ['exchange', 'Exchange guarantee', 'Exchange within 3 days'],
+            ['lock', 'Secure payment', 'Pay safely with every bank'], ['award', 'Satisfaction guarantee', '100% satisfaction guaranteed']])) . '</ul>']),
+    ]),
     // main footer
     con(['content_width' => 'full', 'flex_direction' => 'column', 'background_background' => 'classic', 'background_color' => INK, 'padding' => box(84, 20, 34, 20), 'padding_mobile' => box(56, 20, 30, 20), 'flex_gap' => gap(52), '_css_classes' => 'btq-footer'], [
         con(['content_width' => 'boxed', 'container_type' => 'grid', 'grid_columns_grid' => ['unit' => 'custom', 'size' => '1.4fr 1fr 1fr 1fr'], 'grid_columns_grid_tablet' => sz(2, 'fr'), 'grid_columns_grid_mobile' => sz(1, 'fr'),
              'grid_rows_grid' => sz(1, 'fr'), 'grid_gaps' => gap(40), 'padding' => box(0, 0, 0, 0)], [
             con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(14), 'padding' => box(0, 0, 0, 0)], [
                 w('html', ['html' => '<a class="lmx-flogo" href="' . esc_url(home_url('/')) . '" aria-label="LMX Boutique home"><span class="lmx-flogo-mark">LMX</span><span class="lmx-flogo-sub">Boutique</span></a>']),
-                w('text-editor', array_merge(['editor' => '<p>Premium Fashion &amp; Luxury Essentials. Carefully selected designer clothing, shoes and accessories for people with style.</p>', 'text_color' => '#A39C91', '_css_classes' => 'btq-fdesc'], typo('typography', 14, '400', 0.2, null, 1.85))),
+                w('text-editor', array_merge(['editor' => '<p>Premium Fashion &amp; Luxury Essentials. Carefully selected designer clothing, shoes and accessories for people with style.</p>', 'text_color' => '#A39C91', '_css_classes' => 'btq-fdesc'], typo('typography', 16, '400', 0.2, null, 1.8))),
                 w('icon-list', array_merge(['icon_list' => [
                     ['_id' => eid(), 'text' => $EMAIL, 'selected_icon' => ico('far fa-envelope', 'fa-regular'), 'link' => lnk('mailto:' . $EMAIL)],
                     ['_id' => eid(), 'text' => 'WhatsApp Customer Service', 'selected_icon' => ico('fab fa-whatsapp', 'fa-brands'), 'link' => lnk($WHATSAPP)],
                     ['_id' => eid(), 'text' => $PHONE, 'selected_icon' => ico('fas fa-mobile-alt'), 'link' => lnk($TEL)],
-                ], 'icon_color' => GOLD, 'text_color' => '#E9E4DC', 'text_color_hover' => GOLD_LIGHT, 'space_between' => sz(12), 'icon_size' => sz(14), 'text_indent' => sz(10)], typo('icon_typography', 14, '400', 0.3))),
+                ], 'icon_color' => GOLD, 'text_color' => '#E9E4DC', 'text_color_hover' => GOLD_LIGHT, 'space_between' => sz(16), 'icon_size' => sz(17), 'text_indent' => sz(12)], typo('icon_typography', 16, '500', 0.4))),
                 w('social-icons', ['social_icon_list' => [
                     ['_id' => eid(), 'social_icon' => ico('fab fa-instagram', 'fa-brands'), 'link' => lnk($INSTAGRAM)],
                     ['_id' => eid(), 'social_icon' => ico('fab fa-tiktok', 'fa-brands'), 'link' => lnk($TIKTOK)],
                     ['_id' => eid(), 'social_icon' => ico('fab fa-whatsapp', 'fa-brands'), 'link' => lnk($WHATSAPP)],
-                ], 'icon_color' => 'custom', 'icon_primary_color' => '#1E1C1A', 'icon_secondary_color' => GOLD_LIGHT, 'icon_size' => sz(15), 'icon_padding' => ['unit' => 'em', 'size' => 0.7], 'align' => 'left', 'shape' => 'circle']),
+                ], 'icon_color' => 'custom', 'icon_primary_color' => '#1E1C1A', 'icon_secondary_color' => GOLD_LIGHT, 'icon_size' => sz(17), 'icon_padding' => ['unit' => 'em', 'size' => 0.75], 'icon_spacing' => sz(10), 'align' => 'left', 'shape' => 'circle']),
             ], true),
             con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(18), 'padding' => box(0, 0, 0, 0)], [
                 $fhead('Customer Service'),
@@ -145,18 +142,18 @@ el_template('footer', 'footer', 'LMX Footer', [
                 $fhead('Why LMX Boutique?'),
                 w('icon-list', array_merge(['icon_list' => array_map(fn($t) => ['_id' => eid(), 'text' => $t, 'selected_icon' => ico('fas fa-check')],
                     ['Premium quality', 'Fast shipping', 'Secure payment', 'Personal customer service']),
-                    'icon_color' => GOLD, 'text_color' => '#BDB6AA', 'space_between' => sz(12), 'icon_size' => sz(11), 'text_indent' => sz(10)], typo('icon_typography', 14, '400', 0.3, null, 1.5))),
+                    'icon_color' => GOLD, 'text_color' => '#CFC8BC', 'space_between' => sz(16), 'icon_size' => sz(13), 'text_indent' => sz(12)], typo('icon_typography', 16, '500', 0.6, null, 1.5))),
             ], true),
             con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(18), 'padding' => box(0, 0, 0, 0)], [
                 $fhead('Pay securely with'),
                 w('html', ['html' => file_get_contents(__DIR__ . '/payment-icons.html')]),
-                w('text-editor', array_merge(['editor' => '<p>All payments are encrypted and processed securely.</p>', 'text_color' => '#857F76'], typo('typography', 12.5, '400', 0.2, null, 1.7))),
+                w('text-editor', array_merge(['editor' => '<p>All payments are encrypted and processed securely.</p>', 'text_color' => '#857F76'], typo('typography', 14, '400', 0.2, null, 1.7))),
             ], true),
         ]),
         con(['content_width' => 'boxed', 'flex_direction' => 'row', 'flex_direction_mobile' => 'column', 'flex_justify_content' => 'space-between', 'flex_align_items' => 'center',
              'border_border' => 'solid', 'border_width' => box(1, 0, 0, 0), 'border_color' => 'rgba(201,164,92,.18)', 'padding' => box(28, 0, 0, 0), 'flex_gap' => gap(10)], [
-            w('text-editor', array_merge(['editor' => '<p>© ' . date('Y') . ' LMX Boutique — Premium Fashion &amp; Luxury Essentials. All rights reserved.</p>', 'text_color' => '#7E786F'], typo('typography', 12.5, '400', 0.3))),
-            w('heading', array_merge(['title' => 'Wear confidence. Wear LMX.', 'header_size' => 'p', 'title_color' => GOLD, '_css_classes' => ''], typo('typography', 11.5, '500', 3.2, 'uppercase'))),
+            w('text-editor', array_merge(['editor' => '<p>© ' . date('Y') . ' LMX Boutique — Premium Fashion &amp; Luxury Essentials. All rights reserved.</p>', 'text_color' => '#8A847B'], typo('typography', 14, '400', 0.3))),
+            w('heading', array_merge(['title' => 'Wear confidence. Wear LMX.', 'header_size' => 'p', 'title_color' => GOLD, '_css_classes' => ''], typo('typography', 13, '600', 3.2, 'uppercase'))),
         ]),
     ]),
     // floating WhatsApp button
@@ -166,12 +163,11 @@ el_template('footer', 'footer', 'LMX Footer', [
 echo "footer ok\n";
 
 /* ---------------- SINGLE PRODUCT ---------------- */
-$usp_list = w('icon-list', array_merge(['icon_list' => [
-    ['_id' => eid(), 'text' => 'In stock = shipped within 24 hours', 'selected_icon' => ico('fas fa-shipping-fast')],
-    ['_id' => eid(), 'text' => 'Free exchange within 3 days', 'selected_icon' => ico('fas fa-exchange-alt')],
-    ['_id' => eid(), 'text' => 'Secure payment with iDEAL, card, PayPal & Bancontact', 'selected_icon' => ico('fas fa-lock')],
-    ['_id' => eid(), 'text' => 'Questions? WhatsApp us', 'selected_icon' => ico('fab fa-whatsapp', 'fa-brands'), 'link' => lnk($WHATSAPP)],
-], 'icon_color' => GOLD, 'text_color' => '#3A3A3A', 'space_between' => sz(12), 'icon_size' => sz(15), 'text_indent' => sz(8)], typo('icon_typography', 14, '400')));
+$usp_list = w('html', ['html' => '<ul class="btq-pdp-usps">'
+    . '<li>' . lmx_icon('truck', 18) . '<span>In stock = shipped within 24 hours</span></li>'
+    . '<li>' . lmx_icon('exchange', 18) . '<span>Free exchange within 3 days</span></li>'
+    . '<li>' . lmx_icon('lock', 18) . '<span>Secure payment with iDEAL, card, PayPal &amp; Bancontact</span></li>'
+    . '<li>' . lmx_icon('chat', 18) . '<span><a href="' . esc_url($WHATSAPP) . '">Questions? WhatsApp us</a></span></li></ul>']);
 el_template('single-product', 'product', 'LMX Single Product', [
     con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(24, 20, 10, 20)], [
         w('woocommerce-breadcrumb', ['text_color' => '#8A8A8A', 'link_color' => INK] + typo('text_typography', 13, '400', 0.5)),
@@ -182,8 +178,8 @@ el_template('single-product', 'product', 'LMX Single Product', [
         ], true),
         con(['content_width' => 'full', 'width' => sz(45, '%'), 'width_mobile' => sz(100, '%'), 'flex_direction' => 'column', 'flex_gap' => gap(14), 'padding' => box(0, 0, 0, 0),
              '_css_classes' => 'btq-sticky-col'], [
-            w('heading', array_merge(['title' => 'Premium Collection', 'header_size' => 'p', 'title_color' => GOLD], typo('typography', 12, '600', 3, 'uppercase'))),
-            w('woocommerce-product-title', array_merge(['__dynamic__' => ['title' => \Elementor\Plugin::$instance->dynamic_tags->tag_data_to_tag_text(null, 'woocommerce-product-title-tag')], 'header_size' => 'h1', 'title_color' => INK, 'typography_font_size_mobile' => sz(24)], typo('typography', 32, '500', -0.5, null, 1.2))),
+            w('shortcode', ['shortcode' => '[lmx_brand]']),
+            w('woocommerce-product-title', array_merge(['__dynamic__' => ['title' => \Elementor\Plugin::$instance->dynamic_tags->tag_data_to_tag_text(null, 'woocommerce-product-title-tag')], 'header_size' => 'h1', 'title_color' => INK, 'typography_font_size_mobile' => sz(24)], typo('typography', 30, '500', -0.4, null, 1.25))),
             w('woocommerce-product-rating', []),
             w('woocommerce-product-price', array_merge(['price_color' => INK, 'sale_price_color' => '#B3261E', 'sale_price_newline' => ''], typo('typography', 24, '600'))),
             w('html', ['html' => $with_icons(file_get_contents(__DIR__ . '/delivery-widget.html'))]),
@@ -199,11 +195,11 @@ el_template('single-product', 'product', 'LMX Single Product', [
         ], true),
     ]),
     con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(0, 20, 40, 20)], [
-        w('woocommerce-product-data-tabs', array_merge(['tab_text_color' => '#888', 'tab_active_text_color' => INK, 'tab_bg_color' => '#FFFFFF', 'tab_active_bg_color' => SOFT, 'panel_border_color' => '#EAEAEA'], typo('tab_typography', 13, '600', 2, 'uppercase'))),
+        w('woocommerce-product-data-tabs', array_merge(['tab_text_color' => '#888', 'tab_active_text_color' => INK, 'tab_bg_color' => '#FFFFFF', 'tab_active_bg_color' => SOFT, 'panel_border_color' => '#EAEAEA'], typo('tab_typography', 14, '500', 0.4))),
     ]),
     con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(20, 20, 70, 20)], [
         w('woocommerce-product-related', array_merge(['posts_per_page' => 4, 'columns' => '4', 'columns_tablet' => '3', 'columns_mobile' => '2', 'orderby' => 'rand',
-            'show_heading' => 'yes', 'heading_color' => INK, 'column_gap' => sz(20), 'row_gap' => sz(30)], typo('heading_typography', 26, '600', 1, 'uppercase'))),
+            'show_heading' => 'yes', 'heading_color' => INK, 'column_gap' => sz(24), 'column_gap_mobile' => sz(12), 'row_gap' => sz(30)], typo('heading_typography', 30, '500', -0.5))),
     ]),
 ], ['include/product']);
 echo "single product ok\n";
@@ -211,10 +207,11 @@ echo "single product ok\n";
 /* ---------------- PRODUCT ARCHIVE (shop + categories) ---------------- */
 el_template('product-archive', 'product-archive', 'LMX Shop Archive', [
     con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_align_items' => 'center', 'flex_gap' => gap(10),
-         'background_background' => 'classic', 'background_color' => SOFT, 'padding' => box(60, 20, 50, 20), 'padding_mobile' => box(36, 16, 30, 16), '_css_classes' => 'btq-pattern-light'], [
+         'background_background' => 'classic', 'background_color' => SOFT, 'padding' => box(56, 20, 44, 20), 'padding_mobile' => box(36, 16, 28, 16), '_css_classes' => 'btq-pattern-light btq-page-head'], [
         w('woocommerce-breadcrumb', ['text_color' => '#8A8A8A', 'link_color' => INK, 'align' => 'center'] + typo('text_typography', 13, '400', 0.5)),
-        w('theme-archive-title', array_merge(['__dynamic__' => ['title' => \Elementor\Plugin::$instance->dynamic_tags->tag_data_to_tag_text(null, 'archive-title', ['include_context' => ''])], 'header_size' => 'h1', 'title_color' => INK, 'align' => 'center', 'typography_font_size_mobile' => sz(30)], typo('typography', 46, '700', 2, 'uppercase', 1.1))),
+        w('theme-archive-title', array_merge(['__dynamic__' => ['title' => \Elementor\Plugin::$instance->dynamic_tags->tag_data_to_tag_text(null, 'archive-title', ['include_context' => ''])], 'header_size' => 'h1', 'title_color' => INK, 'align' => 'center', 'typography_font_size_mobile' => sz(32)], typo('typography', 46, '500', -0.8, null, 1.1))),
         w('woocommerce-archive-description', ['align' => 'center', 'text_color' => '#666']),
+        w('shortcode', ['shortcode' => '[lmx_subcats]']),
     ]),
     con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(40, 20, 80, 20)], [
         w('wc-archive-products', [
@@ -260,7 +257,13 @@ echo "popup ok\n";
 
 /* ---------------- HOMEPAGE ---------------- */
 $eyebrow = fn($t, $c = GOLD, $align = 'left') => w('heading', array_merge(['title' => $t, 'header_size' => 'p', 'title_color' => $c, 'align' => $align], typo('typography', 14, '500', 4, 'uppercase')));
-$section_title = fn($t, $align = 'left') => w('heading', array_merge(['title' => $t, 'header_size' => 'h2', 'title_color' => INK, 'align' => $align, 'typography_font_size_mobile' => sz(24)], typo('typography', 32, '700', 1, 'uppercase', 1.15)));
+$section_title = fn($t, $align = 'left') => w('heading', array_merge(['title' => $t, 'header_size' => 'h2', 'title_color' => INK, 'align' => $align, 'typography_font_size_mobile' => sz(26)], typo('typography', 36, '500', -0.6, null, 1.15)));
+$subtitle = fn($t, $align = 'left') => w('heading', array_merge(['title' => $t, 'header_size' => 'p', 'title_color' => '#7A746B', 'align' => $align], typo('typography', 16, '400', 0.2, null, 1.5)));
+// Editorial section header: title (+ optional subtitle) on the left, text link on the right, hairline underneath.
+$section_head = fn($title, $sub = null, $link = null, $link_text = 'View all') => con(['content_width' => 'full', 'flex_direction' => 'row', 'flex_justify_content' => 'space-between', 'flex_align_items' => 'flex-end', 'flex_gap' => gap(20), 'padding' => box(0, 0, 0, 0), '_css_classes' => 'btq-section-head'], array_values(array_filter([
+    con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(8), 'padding' => box(0, 0, 0, 0), 'width' => sz(75, '%')], array_values(array_filter([$section_title($title), $sub ? $subtitle($sub) : null])), true),
+    $link ? w('html', ['html' => '<a class="btq-textlink" href="' . esc_url($link) . '">' . esc_html($link_text) . '</a>']) : null,
+])), true);
 
 $home = [];
 // 1. Hero
@@ -319,42 +322,50 @@ $home[] = con([
         'columns' => '4', 'columns_tablet' => '2', 'columns_mobile' => '2', 'rows' => 1, 'paginate' => '', 'column_gap' => sz(20), 'column_gap_mobile' => sz(10), 'row_gap' => sz(20),
     ]),
 ]);
+// Trust strip + winter drop together form one framed card (max 1240px, rounded, shadow) like the old site.
+$winter_section = array_pop($home); $trust_strip = array_pop($home);
+$winter_section['isInner'] = true; $trust_strip['isInner'] = true;
+$winter_section['settings']['background_background'] = 'classic';
+$winter_section['settings']['background_color'] = '#0A0A0A';
+$winter_section['settings']['padding'] = box(56, 52, 52, 52);
+$winter_section['settings']['padding_tablet'] = box(44, 32, 40, 32);
+$winter_section['settings']['padding_mobile'] = box(36, 20, 32, 20);
+$winter_section['settings']['content_width'] = 'full';
+$home[] = con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(0), 'padding' => box(0, 0, 0, 0), '_css_classes' => 'btq-offer'], [$trust_strip, $winter_section]);
 // 4. New in
-$home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_gap' => gap(28), 'padding' => box(90, 20, 40, 20), 'padding_mobile' => box(56, 16, 24, 16)], [
-    con(['content_width' => 'full', 'flex_direction' => 'row', 'flex_justify_content' => 'space-between', 'flex_align_items' => 'flex-end', 'padding' => box(0, 0, 0, 0)], [
-        con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(6), 'padding' => box(0, 0, 0, 0), 'width' => sz(70, '%')], [$eyebrow('Just landed'), $section_title('New in')], true),
-        w('button', array_merge(['text' => 'View all', 'link' => lnk($shop_url), 'background_color' => 'rgba(0,0,0,0)', 'button_text_color' => INK, 'hover_color' => GOLD, 'text_padding' => box(6, 0, 6, 0)], typo('typography', 13, '600', 2, 'uppercase'))),
-    ], true),
+$home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_gap' => gap(36), 'padding' => box(96, 20, 48, 20), 'padding_mobile' => box(56, 16, 32, 16)], [
+    $section_head('New in', null, $shop_url, 'View all'),
     w('woocommerce-products', [
         'query_post_type' => 'product', 'query_orderby' => 'date', 'query_order' => 'desc', 'query_exclude' => ['terms'], 'query_exclude_term_ids' => [$tt('jackets')],
         'columns' => '4', 'columns_tablet' => '3', 'columns_mobile' => '2', 'rows' => 2, 'paginate' => '', 'column_gap' => sz(24), 'column_gap_mobile' => sz(12), 'row_gap' => sz(40),
     ]),
-    button('Show more', $shop_url, 'outline', ['align' => 'center', 'selected_icon' => ico('')]),
+    button('Show more', $shop_url, 'outline', ['align' => 'center', 'selected_icon' => ico(''), '_css_classes' => 'btq-more']),
 ]);
 // 5. Category tiles
 $tile = fn($slug, $label) => con([
-    'content_width' => 'full', 'flex_direction' => 'column', 'flex_justify_content' => 'flex-end', 'min_height' => sz(380), 'min_height_mobile' => sz(230), 'padding' => box(22, 22, 22, 22), 'padding_mobile' => box(12, 12, 12, 12),
+    'content_width' => 'full', 'flex_direction' => 'column', 'flex_justify_content' => 'flex-end', 'min_height' => sz(460), 'min_height_tablet' => sz(340), 'min_height_mobile' => sz(240), 'padding' => box(28, 28, 28, 28), 'padding_mobile' => box(14, 14, 14, 14),
     'background_background' => 'classic', 'background_color' => SOFT, 'background_image' => img($cat_image($slug)), 'background_position' => 'center center', 'background_size' => 'cover',
-    'background_overlay_background' => 'gradient', 'background_overlay_color' => 'rgba(0,0,0,0)', 'background_overlay_color_b' => 'rgba(0,0,0,0.12)', 'background_overlay_gradient_angle' => sz(180, 'deg'),
+    'background_overlay_background' => 'gradient', 'background_overlay_color' => 'rgba(0,0,0,0)', 'background_overlay_color_b' => 'rgba(10,8,6,0.62)', 'background_overlay_gradient_angle' => sz(180, 'deg'), 'background_overlay_color_stop' => sz(45, '%'),
     'link' => lnk($cat_url($slug)), 'html_tag' => 'a', '_css_classes' => 'btq-tile',
 ], [
-    w('heading', array_merge(['title' => $label, 'header_size' => 'h3', 'title_color' => INK, 'typography_font_size_mobile' => sz(15)], typo('typography', 20, '500', 0.5))),
+    w('heading', array_merge(['title' => esc_html($label) . '<span class="btq-tile-count">' . (int)get_term($cats[$slug], 'product_cat')->count . ' items</span>', 'header_size' => 'h3', 'title_color' => '#FFFFFF', 'typography_font_size_mobile' => sz(17)], typo('typography', 24, '500', -0.2, null, 1.2))),
 ], true);
-$home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_gap' => gap(28), 'padding' => box(60, 20, 60, 20), 'padding_mobile' => box(40, 16, 40, 16)], [
-    con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(6), 'padding' => box(0, 0, 0, 0)], [$eyebrow('Categories', GOLD, 'center'), $section_title('Shop by category', 'center')], true),
+$home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_gap' => gap(36), 'padding' => box(64, 20, 96, 20), 'padding_mobile' => box(40, 16, 56, 16)], [
+    $section_head('Shop by category', null, $shop_url, 'All products'),
     con(['content_width' => 'full', 'container_type' => 'grid', 'grid_columns_grid' => sz(3, 'fr'), 'grid_columns_grid_tablet' => sz(3, 'fr'), 'grid_columns_grid_mobile' => sz(2, 'fr'), 'grid_rows_grid' => sz(2, 'fr'),
          'grid_gaps' => gap(16), 'grid_gaps_mobile' => gap(10), 'padding' => box(0, 0, 0, 0)], [
         $tile('shoes', 'Shoes'), $tile('t-shirts', 'T-Shirts'), $tile('jackets', 'Jackets'), $tile('pants', 'Pants'), $tile('bags', 'Bags'), $tile('accessories', 'Accessories'),
     ], true),
 ]);
 // 6. Trending lookbook
-$home[] = con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(28), 'padding' => box(70, 0, 70, 0), 'background_background' => 'classic', 'background_color' => SOFT, '_css_classes' => 'btq-pattern-light'], [
-    con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(6), 'padding' => box(0, 20, 0, 20)], [$section_title('Trending', 'center'), $eyebrow('The latest looks & outfits', '#777', 'center')], true),
-    w('gallery', [
-        'gallery_type' => 'single', 'gallery' => array_map(fn($id) => ['id' => $id, 'url' => wp_get_attachment_url($id)], $looks),
-        'gallery_layout' => 'grid', 'columns' => 6, 'columns_tablet' => 3, 'columns_mobile' => 2, 'gap' => sz(6), 'aspect_ratio' => '1:1', 'link_to' => 'none',
-        'image_hover_animation' => 'grow', 'thumbnail_image_size' => 'woocommerce_thumbnail', 'overlay_background' => '',
-    ]),
+$home[] = con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(36), 'padding' => box(88, 0, 88, 0), 'padding_mobile' => box(56, 0, 56, 0), 'background_background' => 'classic', 'background_color' => SOFT, '_css_classes' => 'btq-pattern-light'], [
+    con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(0, 20, 0, 20)], [$section_head('Trending', 'The latest looks & outfits', $shop_url, 'Shop the looks')], true),
+    con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(0, 20, 0, 20)], [
+        w('woocommerce-products', [
+            'query_post_type' => 'product', 'query_include' => ['terms'], 'query_include_term_ids' => array_values(array_filter([$tt('bags'), $tt('shoes'), $tt('accessories')])), 'query_orderby' => 'date', 'query_order' => 'desc',
+            'columns' => '6', 'columns_tablet' => '3', 'columns_mobile' => '2', 'rows' => 1, 'paginate' => '', 'column_gap' => sz(12), 'column_gap_mobile' => sz(8), 'row_gap' => sz(12), '_css_classes' => 'btq-looks',
+        ]),
+    ], true),
 ]);
 // 7. Reviews
 $reviews = [
@@ -363,27 +374,27 @@ $reviews = [
     ['Very good service and super fast delivery. I had a question about my order and got an answer right away. The glasses are perfect.', 'Lisa G.'],
     ['You find the best designer clothing here! The price/quality ratio is almost impossible to beat. The clothes I ordered are also very good.', 'Martin O.'],
 ];
-$home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_gap' => gap(30), 'padding' => box(80, 20, 80, 20), 'padding_mobile' => box(50, 16, 50, 16)], [
-    con(['content_width' => 'full', 'flex_direction' => 'column', 'flex_gap' => gap(6), 'padding' => box(0, 0, 0, 0)], [$eyebrow('Reviews', GOLD, 'center'), $section_title('What customers say about us', 'center')], true),
+$home[] = con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_gap' => gap(36), 'padding' => box(96, 20, 96, 20), 'padding_mobile' => box(56, 16, 56, 16)], [
+    $section_head('What customers say about us'),
     w('reviews', array_merge([
         'slides' => array_map(fn($r) => ['_id' => eid(), 'content' => $r[0], 'name' => $r[1], 'title' => 'Verified buyer', 'rating' => 5, 'image' => ['url' => '', 'id' => ''], 'selected_social_icon' => ico(''), 'link' => lnk('')], $reviews),
         'slides_per_view' => '3', 'slides_per_view_tablet' => '2', 'slides_per_view_mobile' => '1', 'slides_to_scroll' => '1', 'autoplay' => 'yes', 'autoplay_speed' => 5000, 'loop' => 'yes',
         'pagination' => 'bullets', 'show_arrows' => 'yes', 'space_between' => sz(20), 'arrows_color' => INK, 'pagination_color' => GOLD,
-        'slide_background_color' => SOFT, 'slide_border_size' => box(0, 0, 0, 0), 'slide_padding' => box(30, 30, 30, 30), 'header_background_color' => SOFT,
+        'slide_background_color' => '#FFFFFF', 'slide_border_size' => box(1, 1, 1, 1), 'slide_border_color' => '#ECE6DA', 'slide_border_radius' => sz(4), 'slide_padding' => box(32, 32, 32, 32), 'header_background_color' => '#FFFFFF', '_css_classes' => 'btq-reviews',
         'star_style' => 'star_unicode', 'stars_color' => GOLD, 'stars_unmarked_color' => '#DDD', 'name_color' => INK, 'title_color' => '#888', 'content_color' => '#3A3A3A',
         'show_separator' => '',
-    ], typo('content_typography', 16, '400', null, null, 1.6), typo('name_typography', 16, '600'), typo('title_typography', 12, '400', 1, 'uppercase'))),
+    ], typo('content_typography', 17, '400', 0.1, null, 1.65), typo('name_typography', 15, '600', 0.2), typo('title_typography', 12, '500', 1.5, 'uppercase'))),
 ]);
 el_page('home', 'Home', $home, 'home');
 echo "home ok\n";
 
 /* ---------------- SALE PAGE ---------------- */
 $page_hero = fn($eyebrowTxt, $title, $sub = '') => con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_align_items' => 'center', 'flex_gap' => gap(12),
-    'background_background' => 'gradient', 'background_color' => '#1C1712', 'background_color_b' => '#050505', 'background_gradient_type' => 'radial',
-    'padding' => box(80, 20, 70, 20), 'padding_mobile' => box(50, 16, 44, 16), '_css_classes' => 'btq-pattern-dark'], array_filter([
-    $eyebrow($eyebrowTxt, GOLD, 'center'),
-    w('heading', array_merge(['title' => $title, 'header_size' => 'h1', 'title_color' => '#FFFFFF', 'align' => 'center', 'typography_font_size_mobile' => sz(32)], typo('typography', 52, '700', 1, 'uppercase', 1.1))),
-    $sub ? w('text-editor', array_merge(['editor' => "<p>$sub</p>", 'text_color' => '#BDB6AA', 'align' => 'center'], typo('typography', 17, '400'))) : null,
+    'background_background' => 'classic', 'background_color' => SOFT,
+    'padding' => box(64, 20, 56, 20), 'padding_mobile' => box(40, 16, 36, 16), '_css_classes' => 'btq-pattern-light btq-page-head'], array_filter([
+    w('woocommerce-breadcrumb', ['text_color' => '#8A8A8A', 'link_color' => INK, 'align' => 'center'] + typo('text_typography', 13, '400', 0.3)),
+    w('heading', array_merge(['title' => $title, 'header_size' => 'h1', 'title_color' => INK, 'align' => 'center', 'typography_font_size_mobile' => sz(32)], typo('typography', 46, '500', -0.8, null, 1.1))),
+    $sub ? w('text-editor', array_merge(['editor' => "<p>$sub</p>", 'text_color' => '#6F6960', 'align' => 'center', '_css_classes' => 'btq-page-sub'], typo('typography', 17, '400', 0.1, null, 1.6))) : null,
 ]));
 el_page('sale', 'Sale', [
     $page_hero('Limited time', 'Sale', 'Up to 50% off selected designer pieces. Use code <strong style="color:#E8CD8E">WINTER15</strong> for an extra 15%.'),
@@ -483,7 +494,8 @@ $woo_page = function ($wc_key, $title, $widget, $settings = []) use ($page_hero)
     $slug = get_post_field('post_name', $id);
     el_page($wc_key, $title, [
         con(['content_width' => 'boxed', 'flex_direction' => 'column', 'flex_align_items' => 'center', 'background_background' => 'classic', 'background_color' => SOFT, 'padding' => box(50, 20, 44, 20), '_css_classes' => 'btq-pattern-light'], [
-            w('heading', array_merge(['title' => $title, 'header_size' => 'h1', 'title_color' => INK, 'align' => 'center', 'typography_font_size_mobile' => sz(28)], typo('typography', 40, '700', 2, 'uppercase'))),
+            w('woocommerce-breadcrumb', ['text_color' => '#8A8A8A', 'link_color' => INK, 'align' => 'center'] + typo('text_typography', 13, '400', 0.3)),
+            w('heading', array_merge(['title' => $title, 'header_size' => 'h1', 'title_color' => INK, 'align' => 'center', 'typography_font_size_mobile' => sz(30)], typo('typography', 42, '500', -0.6, null, 1.1))),
         ]),
         con(['content_width' => 'boxed', 'flex_direction' => 'column', 'padding' => box(50, 20, 90, 20)], [w($widget, $settings)]),
     ], $slug);

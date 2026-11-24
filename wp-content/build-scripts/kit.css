@@ -343,3 +343,41 @@ body { -webkit-font-smoothing: antialiased; }
 .lmx-pay { display: grid !important; grid-template-columns: repeat(5, minmax(0, 52px)); gap: 6px; }
 .lmx-pay li { width: auto !important; height: auto !important; aspect-ratio: 64 / 40; }
 @media (max-width: 767px) { .elementor-location-footer { background-color: #0B0B0B; } }
+
+/* ===================== Winter drop: framed offer card (like the old site) ===================== */
+.btq-offer { width: calc(100% - 40px) !important; max-width: 1240px; margin: 56px auto !important; border-radius: 16px; overflow: hidden;
+  box-shadow: 0 24px 60px -18px rgba(0,0,0,.45), 0 10px 40px rgba(0,0,0,.18); border: 1px solid rgba(201,164,92,.22); isolation: isolate; }
+.btq-offer > .btq-marquee { padding-top: 13px !important; padding-bottom: 13px !important; }
+.btq-offer > .btq-marquee .btq-track { font-weight: 700 !important; letter-spacing: .16em !important; font-size: 12px !important; }
+/* warm gold glows (top-right + bottom-left) under the lattice */
+.btq-offer .btq-dark { background-image:
+    radial-gradient(620px 340px at 88% 8%, rgba(201,164,92,.26), transparent 70%),
+    radial-gradient(460px 280px at 4% 96%, rgba(201,164,92,.12), transparent 70%) !important; }
+.btq-offer .btq-dark::after { -webkit-mask-image: radial-gradient(ellipse 70% 80% at 100% 0%, #000 0%, rgba(0,0,0,.4) 50%, transparent 85%);
+          mask-image: radial-gradient(ellipse 70% 80% at 100% 0%, #000 0%, rgba(0,0,0,.4) 50%, transparent 85%); }
+/* countdown: rounded gold-edged boxes */
+.btq-offer .elementor-countdown-item { background: #161616 !important; border: 1px solid rgba(201,164,92,.35) !important; border-radius: 13px !important; }
+/* pill buttons inside the card */
+.btq-offer .elementor-button { border-radius: 100px !important; transition: transform .25s ease, box-shadow .25s ease, background .25s ease; }
+.btq-offer .elementor-widget-button:first-child .elementor-button { background: linear-gradient(100deg, #F5E6B8, #C9A45C) !important; color: #111 !important; }
+.btq-offer .elementor-widget-button:first-child .elementor-button:hover { transform: scale(1.04); box-shadow: 0 8px 26px rgba(201,164,92,.4); }
+.btq-offer .elementor-widget-button + .elementor-widget-button .elementor-button { border-color: #4A4A4A !important; }
+.btq-offer .elementor-widget-button + .elementor-widget-button .elementor-button:hover { border-color: #fff !important; }
+/* product cards inside the card */
+.btq-offer ul.products li.product { border-radius: 12px; overflow: hidden; }
+@media (max-width: 767px) {
+  .btq-offer { width: calc(100% - 24px) !important; margin: 32px auto !important; border-radius: 12px; }
+}
+
+/* ===================== Footer: larger, navbar-style type ===================== */
+.lmx-flogo-mark { font-size: 54px; }
+.lmx-flogo-sub { font-size: 12.5px; }
+.btq-fdesc p { max-width: 360px; }
+.btq-footer .elementor-icon-list-icon svg { width: 1em; height: 1em; }
+.btq-fhead .elementor-heading-title::after { width: 30px; margin-top: 16px; }
+@media (max-width: 767px) { .lmx-flogo-mark { font-size: 46px; } }
+/* small laptops (1025-1279px): keep the menu on one line */
+@media (min-width: 1025px) and (max-width: 1279px) {
+  .btq-h-row .elementor-nav-menu--main .elementor-item { padding-left: 6px !important; padding-right: 6px !important; font-size: 12px !important; letter-spacing: .8px !important; }
+  .btq-h-row .elementor-widget-theme-site-title .elementor-heading-title { font-size: 20px !important; letter-spacing: 3px !important; }
+}
